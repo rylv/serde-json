@@ -1,4 +1,4 @@
-// Modified by the rylv-serde-json fork: crate rename and related references.
+// Modified by the rylv-serde-json fork: crate rename and reusable scratch buffer API.
 // Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
 
 //! Deserialize JSON data to a Rust data structure.
@@ -60,15 +60,30 @@ where
     ///
     /// [`File`]: std::fs::File
     pub fn new(read: R) -> Self {
+        Self::new_with_scratch(read, Vec::new())
+    }
+
+    /// Create a JSON deserializer backed by a reusable scratch buffer.
+    ///
+    /// The buffer is cleared before use and can be recovered with
+    /// [`Deserializer::into_scratch`] after deserialization. Reusing it avoids
+    /// allocating a new temporary buffer for escaped strings and long numbers.
+    pub fn new_with_scratch(read: R, mut scratch: Vec<u8>) -> Self {
+        scratch.clear();
         Deserializer {
             read,
-            scratch: Vec::new(),
+            scratch,
             remaining_depth: 128,
             #[cfg(feature = "float_roundtrip")]
             single_precision: false,
             #[cfg(feature = "unbounded_depth")]
             disable_recursion_limit: false,
         }
+    }
+
+    /// Consume this deserializer and return its reusable scratch buffer.
+    pub fn into_scratch(self) -> Vec<u8> {
+        self.scratch
     }
 }
 
@@ -91,6 +106,12 @@ impl<'a> Deserializer<read::SliceRead<'a>> {
     /// Creates a JSON deserializer from a `&[u8]`.
     pub fn from_slice(bytes: &'a [u8]) -> Self {
         Deserializer::new(read::SliceRead::new(bytes))
+    }
+
+    /// Creates a JSON deserializer from a `&[u8]` using a reusable scratch
+    /// buffer.
+    pub fn from_slice_with_scratch(bytes: &'a [u8], scratch: Vec<u8>) -> Self {
+        Deserializer::new_with_scratch(read::SliceRead::new(bytes), scratch)
     }
 }
 

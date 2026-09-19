@@ -24,6 +24,11 @@ See [NOTICE](NOTICE) for provenance and modification notices.
   and CI references. Internal serialization tokens remain unchanged.
 - Document the fork's provenance and license, and mark modified upstream files.
 
+- On `feature/expose_scratch`: add `Deserializer::new_with_scratch`,
+  `Deserializer::from_slice_with_scratch`, and `Deserializer::into_scratch`
+  to reuse and recover the deserialization scratch buffer. This addition is
+  not part of the rename PR against `master`.
+
 Keep this list current as changes are added. Only list implemented changes;
 identify changes confined to a feature branch explicitly. When modifying an
 upstream file, retain its existing attribution and add or update a prominent
