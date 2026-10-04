@@ -5,7 +5,31 @@
 [Latest Version]: https://img.shields.io/crates/v/rylv-serde-json.svg
 [crates.io]: https://crates.io/crates/rylv-serde-json
 
-A fork of [serde_json](https://github.com/serde-rs/json).
+## Fork origin, license, and changes
+
+`rylv-serde-json` is a fork of [serde_json](https://github.com/serde-rs/json),
+originally developed by the Serde JSON contributors. The upstream base is
+[commit afdf6fc](https://github.com/serde-rs/json/commit/afdf6fc).
+This fork is maintained in [rylv/serde-json](https://github.com/rylv/serde-json).
+
+The upstream code and this fork are available under either the
+[MIT license](LICENSE-MIT) or [Apache License 2.0](LICENSE-APACHE), at your option.
+Both upstream license texts and existing attribution notices are preserved.
+See [NOTICE](NOTICE) for provenance and modification notices.
+
+### Changes from upstream
+
+- Rename the Cargo package to `rylv-serde-json` and the Rust crate to
+  `rylv_serde_json`; update metadata, documentation, examples, tests, fuzzing,
+  and CI references. Internal serialization tokens remain unchanged.
+- Document the fork's provenance and license, and mark modified upstream files.
+
+Keep this list current as changes are added. Only list implemented changes;
+identify changes confined to a feature branch explicitly. When modifying an
+upstream file, retain its existing attribution and add or update a prominent
+modification notice in that file.
+
+---
 
 **Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**
 

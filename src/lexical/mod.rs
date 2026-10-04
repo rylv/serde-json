@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 // The code in this module is derived from the `lexical` crate by @Alexhuszagh
 // which the author condensed into this minimal subset for use in rylv_serde_json.
 // For the rylv_serde_json use case we care more about reliably round tripping all

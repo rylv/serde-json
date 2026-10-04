@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 //! The Value enum, a loosely typed way of representing any valid JSON value.
 //!
 //! # Constructing JSON
