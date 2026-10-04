@@ -1,4 +1,4 @@
-use serde_json::json;
+use rylv_serde_json::json;
 
 fn main() {
     json!([ true => ]);

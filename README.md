@@ -1,9 +1,11 @@
-# Serde JSON &emsp; [![Build Status]][actions] [![Latest Version]][crates.io]
+# rylv-serde-json &emsp; [![Build Status]][actions] [![Latest Version]][crates.io]
 
-[Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/json/ci.yml?branch=master
-[actions]: https://github.com/serde-rs/json/actions?query=branch%3Amaster
-[Latest Version]: https://img.shields.io/crates/v/serde_json.svg
-[crates.io]: https://crates.io/crates/serde\_json
+[Build Status]: https://img.shields.io/github/actions/workflow/status/rylv/serde-json/ci.yml?branch=master
+[actions]: https://github.com/rylv/serde-json/actions?query=branch%3Amaster
+[Latest Version]: https://img.shields.io/crates/v/rylv-serde-json.svg
+[crates.io]: https://crates.io/crates/rylv-serde-json
+
+A fork of [serde_json](https://github.com/serde-rs/json).
 
 **Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**
 
@@ -11,16 +13,16 @@
 
 ```toml
 [dependencies]
-serde_json = "1.0"
+rylv-serde-json = "1.0"
 ```
 
 You may be looking for:
 
-- [JSON API documentation](https://docs.rs/serde_json)
+- [JSON API documentation](https://docs.rs/rylv-serde-json)
 - [Serde API documentation](https://docs.rs/serde)
 - [Detailed documentation about Serde](https://serde.rs/)
 - [Setting up `#[derive(Serialize, Deserialize)]`](https://serde.rs/derive.html)
-- [Release notes](https://github.com/serde-rs/json/releases)
+- [Release notes](https://github.com/rylv/serde-json/releases)
 
 JSON is a ubiquitous open-standard format that uses human-readable text to
 transmit data objects consisting of key-value pairs.
@@ -59,7 +61,7 @@ each of these representations.
 ## Operating on untyped JSON values
 
 Any valid JSON data can be manipulated in the following recursive enum
-representation. This data structure is [`serde_json::Value`][value].
+representation. This data structure is [`rylv_serde_json::Value`][value].
 
 ```rust
 enum Value {
@@ -72,8 +74,8 @@ enum Value {
 }
 ```
 
-A string of JSON data can be parsed into a `serde_json::Value` by the
-[`serde_json::from_str`][from_str] function. There is also
+A string of JSON data can be parsed into a `rylv_serde_json::Value` by the
+[`rylv_serde_json::from_str`][from_str] function. There is also
 [`from_slice`][from_slice] for parsing from a byte slice `&[u8]` and
 [`from_reader`][from_reader] for parsing from any `io::Read` like a File or a
 TCP stream.
@@ -85,7 +87,7 @@ TCP stream.
 </div>
 
 ```rust
-use serde_json::{Result, Value};
+use rylv_serde_json::{Result, Value};
 
 fn untyped_example() -> Result<()> {
     // Some JSON input data as a &str. Maybe this comes from the user.
@@ -99,8 +101,8 @@ fn untyped_example() -> Result<()> {
             ]
         }"#;
 
-    // Parse the string of data into serde_json::Value.
-    let v: Value = serde_json::from_str(data)?;
+    // Parse the string of data into rylv_serde_json::Value.
+    let v: Value = rylv_serde_json::from_str(data)?;
 
     // Access parts of the data by indexing with square brackets.
     println!("Please call {} at the number {}", v["name"], v["phones"][0]);
@@ -124,7 +126,7 @@ without quotation marks involves converting from a JSON string to a Rust string
 with [`as_str()`] or avoiding the use of `Value` as described in the following
 section.
 
-[`as_str()`]: https://docs.rs/serde_json/1/serde_json/enum.Value.html#method.as_str
+[`as_str()`]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/enum.Value.html#method.as_str
 
 The `Value` representation is sufficient for very basic tasks but can be tedious
 to work with for anything more significant. Error handling is verbose to
@@ -146,7 +148,7 @@ largely automatically.
 
 ```rust
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
+use rylv_serde_json::Result;
 
 #[derive(Serialize, Deserialize)]
 struct Person {
@@ -168,9 +170,9 @@ fn typed_example() -> Result<()> {
         }"#;
 
     // Parse the string of data into a Person object. This is exactly the
-    // same function as the one that produced serde_json::Value above, but
+    // same function as the one that produced rylv_serde_json::Value above, but
     // now we are asking it for a Person as output.
-    let p: Person = serde_json::from_str(data)?;
+    let p: Person = rylv_serde_json::from_str(data)?;
 
     // Do things just like with any other Rust data structure.
     println!("Please call {} at the number {}", p.name, p.phones[0]);
@@ -179,7 +181,7 @@ fn typed_example() -> Result<()> {
 }
 ```
 
-This is the same `serde_json::from_str` function as before, but this time we
+This is the same `rylv_serde_json::from_str` function as before, but this time we
 assign the return value to a variable of type `Person` so Serde will
 automatically interpret the input data as a `Person` and produce informative
 error messages if the layout does not conform to what a `Person` is expected to
@@ -192,7 +194,7 @@ way. This includes built-in Rust standard library types like `Vec<T>` and
 
 Once we have `p` of type `Person`, our IDE and the Rust compiler can help us use
 it correctly like they do for any other Rust code. The IDE can autocomplete
-field names to prevent typos, which was impossible in the `serde_json::Value`
+field names to prevent typos, which was impossible in the `rylv_serde_json::Value`
 representation. And the Rust compiler can check that when we write
 `p.phones[0]`, then `p.phones` is guaranteed to be a `Vec<String>` so indexing
 into it makes sense and produces a `String`.
@@ -204,7 +206,7 @@ derive]* page of the Serde site.
 
 ## Constructing JSON values
 
-Serde JSON provides a [`json!` macro][macro] to build `serde_json::Value`
+Serde JSON provides a [`json!` macro][macro] to build `rylv_serde_json::Value`
 objects with very natural JSON syntax.
 
 <div align="right">
@@ -214,10 +216,10 @@ objects with very natural JSON syntax.
 </div>
 
 ```rust
-use serde_json::json;
+use rylv_serde_json::json;
 
 fn main() {
-    // The type of `john` is `serde_json::Value`
+    // The type of `john` is `rylv_serde_json::Value`
     let john = json!({
         "name": "John Doe",
         "age": 43,
@@ -234,7 +236,7 @@ fn main() {
 }
 ```
 
-The `Value::to_string()` function converts a `serde_json::Value` into a `String`
+The `Value::to_string()` function converts a `rylv_serde_json::Value` into a `String`
 of JSON text.
 
 One neat thing about the `json!` macro is that variables and expressions can be
@@ -252,7 +254,7 @@ represented as JSON.
 let full_name = "John Doe";
 let age_last_year = 42;
 
-// The type of `john` is `serde_json::Value`
+// The type of `john` is `rylv_serde_json::Value`
 let john = json!({
     "name": full_name,
     "age": age_last_year + 1,
@@ -270,9 +272,9 @@ text.
 ## Creating JSON by serializing data structures
 
 A data structure can be converted to a JSON string by
-[`serde_json::to_string`][to_string]. There is also
-[`serde_json::to_vec`][to_vec] which serializes to a `Vec<u8>` and
-[`serde_json::to_writer`][to_writer] which serializes to any `io::Write`
+[`rylv_serde_json::to_string`][to_string]. There is also
+[`rylv_serde_json::to_vec`][to_vec] which serializes to a `Vec<u8>` and
+[`rylv_serde_json::to_writer`][to_writer] which serializes to any `io::Write`
 such as a File or a TCP stream.
 
 <div align="right">
@@ -283,7 +285,7 @@ such as a File or a TCP stream.
 
 ```rust
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
+use rylv_serde_json::Result;
 
 #[derive(Serialize, Deserialize)]
 struct Address {
@@ -299,7 +301,7 @@ fn print_an_address() -> Result<()> {
     };
 
     // Serialize it to a JSON string.
-    let j = serde_json::to_string(&address)?;
+    let j = rylv_serde_json::to_string(&address)?;
 
     // Print, write to a file, or send to an HTTP server.
     println!("{}", j);
@@ -347,13 +349,13 @@ closed without a response after some time.
 
 ## No-std support
 
-As long as there is a memory allocator, it is possible to use serde_json without
+As long as there is a memory allocator, it is possible to use rylv_serde_json without
 the rest of the Rust standard library. Disable the default "std" feature and
 enable the "alloc" feature:
 
 ```toml
 [dependencies]
-serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+rylv-serde-json = { version = "1.0", default-features = false, features = ["alloc"] }
 ```
 
 For JSON support in Serde without a memory allocator, please see the
@@ -361,14 +363,14 @@ For JSON support in Serde without a memory allocator, please see the
 
 [`serde-json-core`]: https://github.com/rust-embedded-community/serde-json-core
 
-[value]: https://docs.rs/serde_json/1/serde_json/value/enum.Value.html
-[from_str]: https://docs.rs/serde_json/1/serde_json/de/fn.from_str.html
-[from_slice]: https://docs.rs/serde_json/1/serde_json/de/fn.from_slice.html
-[from_reader]: https://docs.rs/serde_json/1/serde_json/de/fn.from_reader.html
-[to_string]: https://docs.rs/serde_json/1/serde_json/ser/fn.to_string.html
-[to_vec]: https://docs.rs/serde_json/1/serde_json/ser/fn.to_vec.html
-[to_writer]: https://docs.rs/serde_json/1/serde_json/ser/fn.to_writer.html
-[macro]: https://docs.rs/serde_json/1/serde_json/macro.json.html
+[value]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/value/enum.Value.html
+[from_str]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/de/fn.from_str.html
+[from_slice]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/de/fn.from_slice.html
+[from_reader]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/de/fn.from_reader.html
+[to_string]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/ser/fn.to_string.html
+[to_vec]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/ser/fn.to_vec.html
+[to_writer]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/ser/fn.to_writer.html
+[macro]: https://docs.rs/rylv-serde-json/1/rylv_serde_json/macro.json.html
 
 <br>
 

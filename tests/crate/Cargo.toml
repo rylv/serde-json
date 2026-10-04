@@ -1,5 +1,5 @@
 [package]
-name = "serde_json_test"
+name = "rylv-serde-json-test"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -8,14 +8,14 @@ publish = false
 path = "test.rs"
 
 [dependencies]
-serde_json = { path = "../..", default-features = false }
+rylv-serde-json = { path = "../..", default-features = false }
 
 [features]
 default = ["std"]
-std = ["serde_json/std"]
-alloc = ["serde_json/alloc"]
-#preserve_order = ["serde_json/preserve_order"]
-float_roundtrip = ["serde_json/float_roundtrip"]
-arbitrary_precision = ["serde_json/arbitrary_precision"]
-raw_value = ["serde_json/raw_value"]
-unbounded_depth = ["serde_json/unbounded_depth"]
+std = ["rylv-serde-json/std"]
+alloc = ["rylv-serde-json/alloc"]
+#preserve_order = ["rylv-serde-json/preserve_order"]
+float_roundtrip = ["rylv-serde-json/float_roundtrip"]
+arbitrary_precision = ["rylv-serde-json/arbitrary_precision"]
+raw_value = ["rylv-serde-json/raw_value"]
+unbounded_depth = ["rylv-serde-json/unbounded_depth"]
