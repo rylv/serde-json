@@ -1,0 +1,18 @@
+rylv-serde-json
+
+This project is derived from serde_json, developed by the Serde JSON
+contributors: https://github.com/serde-rs/json
+Upstream base: afdf6fc (https://github.com/serde-rs/json/commit/afdf6fc).
+Fork repository: https://github.com/rylv/serde-json
+
+The original license texts are retained in LICENSE-MIT and LICENSE-APACHE.
+The upstream code and fork contributions are licensed under MIT OR Apache-2.0.
+Existing upstream attribution notices are retained, including Alexander
+Huszagh's copyright notice for the lexical code in src/lexical/mod.rs.
+
+Files changed by this fork carry modification notices. The fork renames the
+package and Rust crate and updates related metadata, documentation, examples,
+tests, fuzzing, and CI references. See README.md for the current list of changes.
+
+This NOTICE records provenance and modifications; it does not change the
+license terms or imply endorsement by the upstream authors.

@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 use crate::error::{Error, ErrorCode, Result};
 use alloc::vec::Vec;
 use core::cmp;
@@ -24,7 +27,7 @@ use serde::de::Visitor;
 /// stable we can use actual specialization.
 ///
 /// This trait is sealed and cannot be implemented for types outside of
-/// `serde_json`.
+/// `rylv_serde_json`.
 pub trait Read<'de>: private::Sealed {
     #[doc(hidden)]
     fn next(&mut self) -> Result<Option<u8>>;
@@ -193,7 +196,7 @@ where
     /// Create a JSON input source to read from a std::io input stream.
     ///
     /// When reading from a source against which short reads are not efficient, such
-    /// as a [`File`], you will want to apply your own buffering because serde_json
+    /// as a [`File`], you will want to apply your own buffering because rylv_serde_json
     /// will not buffer the input. See [`std::io::BufReader`].
     ///
     /// [`File`]: std::fs::File

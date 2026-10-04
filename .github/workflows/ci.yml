@@ -1,3 +1,6 @@
+# Modified by the rylv-serde-json fork: crate rename and related references.
+# Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 name: CI
 
 on:
@@ -67,9 +70,9 @@ jobs:
       - run: cargo check --manifest-path tests/crate/Cargo.toml --no-default-features --features alloc
       - run: cargo check --manifest-path tests/crate/Cargo.toml --no-default-features --features alloc,arbitrary_precision
       - run: cargo check --manifest-path tests/crate/Cargo.toml --no-default-features --features alloc,raw_value
-      - run: cargo check --manifest-path tests/crate/Cargo.toml --features serde_json/preserve_order
+      - run: cargo check --manifest-path tests/crate/Cargo.toml --features rylv-serde-json/preserve_order
         if: matrix.rust != '1.71.0'
-      - run: cargo check --manifest-path tests/crate/Cargo.toml --no-default-features --features alloc,serde_json/preserve_order
+      - run: cargo check --manifest-path tests/crate/Cargo.toml --no-default-features --features alloc,rylv-serde-json/preserve_order
         if: matrix.rust != '1.71.0'
       - name: Build without std
         run: cargo check --manifest-path tests/crate/Cargo.toml --target

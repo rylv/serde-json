@@ -1,7 +1,10 @@
-//! A map of String to serde_json::Value.
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
+//! A map of String to rylv_serde_json::Value.
 //!
 //! By default the map is backed by a [`BTreeMap`]. Enable the `preserve_order`
-//! feature of serde_json to use [`IndexMap`] instead.
+//! feature of rylv_serde_json to use [`IndexMap`] instead.
 //!
 //! [`BTreeMap`]: std::collections::BTreeMap
 //! [`IndexMap`]: indexmap::IndexMap
@@ -147,7 +150,7 @@ impl Map<String, Value> {
     /// The key may be any borrowed form of the map's key type, but the ordering
     /// on the borrowed form *must* match the ordering on the key type.
     ///
-    /// If serde_json's "preserve_order" is enabled, `.remove(key)` is
+    /// If rylv_serde_json's "preserve_order" is enabled, `.remove(key)` is
     /// equivalent to [`.swap_remove(key)`][Self::swap_remove], replacing this
     /// entry's position with the last element. If you need to preserve the
     /// relative order of the keys in the map, use
@@ -170,7 +173,7 @@ impl Map<String, Value> {
     /// The key may be any borrowed form of the map's key type, but the ordering
     /// on the borrowed form *must* match the ordering on the key type.
     ///
-    /// If serde_json's "preserve_order" is enabled, `.remove_entry(key)` is
+    /// If rylv_serde_json's "preserve_order" is enabled, `.remove_entry(key)` is
     /// equivalent to [`.swap_remove_entry(key)`][Self::swap_remove_entry],
     /// replacing this entry's position with the last element. If you need to
     /// preserve the relative order of the keys in the map, use
@@ -360,10 +363,10 @@ impl Map<String, Value> {
 
     /// Sorts this map's entries in-place using `str`'s usual ordering.
     ///
-    /// If serde_json's "preserve_order" feature is not enabled, this method
+    /// If rylv_serde_json's "preserve_order" feature is not enabled, this method
     /// does no work because all JSON maps are always kept in a sorted state.
     ///
-    /// If serde_json's "preserve_order" feature is enabled, this method
+    /// If rylv_serde_json's "preserve_order" feature is enabled, this method
     /// destroys the original source order or insertion order of this map in
     /// favor of an alphanumerical order that matches how a BTreeMap with the
     /// same contents would be ordered. This takes **O(n log n + c)** time where
@@ -435,7 +438,7 @@ impl Hash for Map<String, Value> {
 /// map.
 ///
 /// ```
-/// # use serde_json::Value;
+/// # use rylv_serde_json::Value;
 /// #
 /// # let val = &Value::String("".to_owned());
 /// # let _ =
@@ -463,10 +466,10 @@ where
 /// present in the map.
 ///
 /// ```
-/// # use serde_json::json;
+/// # use rylv_serde_json::json;
 /// #
-/// # let mut map = serde_json::Map::new();
-/// # map.insert("key".to_owned(), serde_json::Value::Null);
+/// # let mut map = rylv_serde_json::Map::new();
+/// # map.insert("key".to_owned(), rylv_serde_json::Value::Null);
 /// #
 /// map["key"] = json!("value");
 /// ```
@@ -653,7 +656,7 @@ impl<'a> Entry<'a> {
     /// # Examples
     ///
     /// ```
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// assert_eq!(map.entry("serde").key(), &"serde");
     /// ```
     pub fn key(&self) -> &String {
@@ -669,9 +672,9 @@ impl<'a> Entry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.entry("serde").or_insert(json!(12));
     ///
     /// assert_eq!(map["serde"], 12);
@@ -690,9 +693,9 @@ impl<'a> Entry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.entry("serde").or_insert_with(|| json!("hoho"));
     ///
     /// assert_eq!(map["serde"], "hoho".to_owned());
@@ -713,9 +716,9 @@ impl<'a> Entry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.entry("serde")
     ///     .and_modify(|e| *e = json!("rust"))
     ///     .or_insert(json!("cpp"));
@@ -749,9 +752,9 @@ impl<'a> VacantEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     ///
     /// match map.entry("serde") {
     ///     Entry::Vacant(vacant) => {
@@ -771,11 +774,11 @@ impl<'a> VacantEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     ///
     /// match map.entry("serde") {
     ///     Entry::Vacant(vacant) => {
@@ -796,11 +799,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!(12));
     ///
     /// match map.entry("serde") {
@@ -820,11 +823,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!(12));
     ///
     /// match map.entry("serde") {
@@ -844,11 +847,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!([1, 2, 3]));
     ///
     /// match map.entry("serde") {
@@ -870,11 +873,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!([1, 2, 3]));
     ///
     /// match map.entry("serde") {
@@ -897,11 +900,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!(12));
     ///
     /// match map.entry("serde") {
@@ -919,7 +922,7 @@ impl<'a> OccupiedEntry<'a> {
 
     /// Takes the value of the entry out of the map, and returns it.
     ///
-    /// If serde_json's "preserve_order" is enabled, `.remove()` is
+    /// If rylv_serde_json's "preserve_order" is enabled, `.remove()` is
     /// equivalent to [`.swap_remove()`][Self::swap_remove], replacing this
     /// entry's position with the last element. If you need to preserve the
     /// relative order of the keys in the map, use
@@ -928,11 +931,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!(12));
     ///
     /// match map.entry("serde") {
@@ -980,7 +983,7 @@ impl<'a> OccupiedEntry<'a> {
 
     /// Removes the entry from the map, returning the stored key and value.
     ///
-    /// If serde_json's "preserve_order" is enabled, `.remove_entry()` is
+    /// If rylv_serde_json's "preserve_order" is enabled, `.remove_entry()` is
     /// equivalent to [`.swap_remove_entry()`][Self::swap_remove_entry],
     /// replacing this entry's position with the last element. If you need to
     /// preserve the relative order of the keys in the map, use
@@ -989,11 +992,11 @@ impl<'a> OccupiedEntry<'a> {
     /// # Examples
     ///
     /// ```
-    /// # use serde_json::json;
+    /// # use rylv_serde_json::json;
     /// #
-    /// use serde_json::map::Entry;
+    /// use rylv_serde_json::map::Entry;
     ///
-    /// let mut map = serde_json::Map::new();
+    /// let mut map = rylv_serde_json::Map::new();
     /// map.insert("serde".to_owned(), json!(12));
     ///
     /// match map.entry("serde") {
@@ -1055,7 +1058,7 @@ impl<'a> IntoIterator for &'a Map<String, Value> {
     }
 }
 
-/// An iterator over a serde_json::Map's entries.
+/// An iterator over a rylv_serde_json::Map's entries.
 #[derive(Clone, Debug)]
 pub struct Iter<'a> {
     iter: IterImpl<'a>,
@@ -1081,7 +1084,7 @@ impl<'a> IntoIterator for &'a mut Map<String, Value> {
     }
 }
 
-/// A mutable iterator over a serde_json::Map's entries.
+/// A mutable iterator over a rylv_serde_json::Map's entries.
 #[derive(Debug)]
 pub struct IterMut<'a> {
     iter: IterMutImpl<'a>,
@@ -1107,7 +1110,7 @@ impl IntoIterator for Map<String, Value> {
     }
 }
 
-/// An owning iterator over a serde_json::Map's entries.
+/// An owning iterator over a rylv_serde_json::Map's entries.
 #[derive(Debug)]
 pub struct IntoIter {
     iter: IntoIterImpl,
@@ -1122,7 +1125,7 @@ delegate_iterator!((IntoIter) => (String, Value));
 
 //////////////////////////////////////////////////////////////////////////////
 
-/// An iterator over a serde_json::Map's keys.
+/// An iterator over a rylv_serde_json::Map's keys.
 #[derive(Clone, Debug)]
 pub struct Keys<'a> {
     iter: KeysImpl<'a>,
@@ -1137,7 +1140,7 @@ delegate_iterator!((Keys<'a>) => &'a String);
 
 //////////////////////////////////////////////////////////////////////////////
 
-/// An iterator over a serde_json::Map's values.
+/// An iterator over a rylv_serde_json::Map's values.
 #[derive(Clone, Debug)]
 pub struct Values<'a> {
     iter: ValuesImpl<'a>,
@@ -1152,7 +1155,7 @@ delegate_iterator!((Values<'a>) => &'a Value);
 
 //////////////////////////////////////////////////////////////////////////////
 
-/// A mutable iterator over a serde_json::Map's values.
+/// A mutable iterator over a rylv_serde_json::Map's values.
 #[derive(Debug)]
 pub struct ValuesMut<'a> {
     iter: ValuesMutImpl<'a>,
@@ -1167,7 +1170,7 @@ delegate_iterator!((ValuesMut<'a>) => &'a mut Value);
 
 //////////////////////////////////////////////////////////////////////////////
 
-/// An owning iterator over a serde_json::Map's values.
+/// An owning iterator over a rylv_serde_json::Map's values.
 #[derive(Debug)]
 pub struct IntoValues {
     iter: IntoValuesImpl,

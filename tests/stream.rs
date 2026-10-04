@@ -1,6 +1,9 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 #![allow(clippy::assertions_on_result_states)]
 
-use serde_json::{json, Deserializer, Value};
+use rylv_serde_json::{json, Deserializer, Value};
 
 // Rustfmt issue https://github.com/rust-lang-nursery/rustfmt/issues/2740
 #[rustfmt::skip]

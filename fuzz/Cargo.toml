@@ -1,5 +1,8 @@
+# Modified by the rylv-serde-json fork: crate rename and related references.
+# Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 [package]
-name = "serde_json-fuzz"
+name = "rylv-serde-json-fuzz"
 version = "0.0.0"
 edition = "2021"
 publish = false
@@ -9,7 +12,7 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-serde_json = { path = ".." }
+rylv-serde-json = { path = ".." }
 
 [[bin]]
 name = "from_slice"

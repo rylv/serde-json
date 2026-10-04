@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 use serde::de::{Deserializer, EnumAccess, VariantAccess, Visitor};
 use std::fmt;
 
@@ -22,7 +25,7 @@ impl<'de> Visitor<'de> for EnumVisitor {
 
 #[test]
 fn test() {
-    let mut de = serde_json::Deserializer::from_str("{[true]: null}");
+    let mut de = rylv_serde_json::Deserializer::from_str("{[true]: null}");
     let err = de.deserialize_enum("name", &[], EnumVisitor).unwrap_err();
 
     assert!(err.to_string().contains("key must be a string"));

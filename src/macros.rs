@@ -1,7 +1,10 @@
-/// Construct a `serde_json::Value` from a JSON literal.
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
+/// Construct a `rylv_serde_json::Value` from a JSON literal.
 ///
 /// ```
-/// # use serde_json::json;
+/// # use rylv_serde_json::json;
 /// #
 /// let value = json!({
 ///     "code": 200,
@@ -24,7 +27,7 @@
 /// map with non-string keys, the `json!` macro will panic.
 ///
 /// ```
-/// # use serde_json::json;
+/// # use rylv_serde_json::json;
 /// #
 /// let code = 200;
 /// let features = vec!["serde", "json"];
@@ -41,7 +44,7 @@
 /// Trailing commas are allowed inside both arrays and objects.
 ///
 /// ```
-/// # use serde_json::json;
+/// # use rylv_serde_json::json;
 /// #
 /// let value = json!([
 ///     "notice",

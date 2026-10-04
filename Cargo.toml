@@ -1,13 +1,16 @@
+# Modified by the rylv-serde-json fork: crate rename and related references.
+# Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 [package]
-name = "serde_json"
+name = "rylv-serde-json"
 version = "1.0.151"
 categories = ["encoding", "parser-implementations", "no-std"]
-description = "A JSON serialization file format"
-documentation = "https://docs.rs/serde_json"
+description = "A JSON serialization file format — fork of serde_json"
+documentation = "https://docs.rs/rylv-serde-json"
 edition = "2021"
 keywords = ["json", "serde", "serialization"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/serde-rs/json"
+repository = "https://github.com/rylv/serde-json"
 rust-version = "1.71"
 
 [dependencies]
@@ -58,7 +61,7 @@ std = ["memchr/std", "serde_core/std"]
 # NOTE: Disabling both `std` *and* `alloc` features is not supported yet.
 alloc = ["serde_core/alloc"]
 
-# Make serde_json::Map use a representation which maintains insertion order.
+# Make rylv_serde_json::Map use a representation which maintains insertion order.
 # This allows data to be read into a Value and written back to a JSON string
 # while preserving the order of map keys in the input.
 preserve_order = ["indexmap", "std"]
@@ -72,11 +75,11 @@ preserve_order = ["indexmap", "std"]
 # output identical to the input.
 float_roundtrip = []
 
-# Use an arbitrary precision number representation for serde_json::Number. This
+# Use an arbitrary precision number representation for rylv_serde_json::Number. This
 # allows JSON numbers of arbitrary size/precision to be read into a Number and
 # written back to a JSON string without loss of precision.
 #
-# Unlike float_roundtrip, this feature makes JSON -> serde_json::Number -> JSON
+# Unlike float_roundtrip, this feature makes JSON -> rylv_serde_json::Number -> JSON
 # produce output identical to the input.
 arbitrary_precision = []
 

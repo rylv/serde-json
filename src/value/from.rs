@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 use super::Value;
 use crate::map::Map;
 use crate::number::Number;
@@ -34,7 +37,7 @@ impl From<f32> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let f: f32 = 13.37;
     /// let x: Value = f.into();
@@ -51,7 +54,7 @@ impl From<f64> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let f: f64 = 13.37;
     /// let x: Value = f.into();
@@ -67,7 +70,7 @@ impl From<bool> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let b = false;
     /// let x: Value = b.into();
@@ -83,7 +86,7 @@ impl From<String> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let s: String = "lorem".to_owned();
     /// let x: Value = s.into();
@@ -99,7 +102,7 @@ impl From<&str> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let s: &str = "lorem";
     /// let x: Value = s.into();
@@ -115,7 +118,7 @@ impl<'a> From<Cow<'a, str>> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     /// use std::borrow::Cow;
     ///
     /// let s: Cow<str> = Cow::Borrowed("lorem");
@@ -123,7 +126,7 @@ impl<'a> From<Cow<'a, str>> for Value {
     /// ```
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     /// use std::borrow::Cow;
     ///
     /// let s: Cow<str> = Cow::Owned("lorem".to_owned());
@@ -140,7 +143,7 @@ impl From<Number> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::{Number, Value};
+    /// use rylv_serde_json::{Number, Value};
     ///
     /// let n = Number::from(7);
     /// let x: Value = n.into();
@@ -156,7 +159,7 @@ impl From<Map<String, Value>> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::{Map, Value};
+    /// use rylv_serde_json::{Map, Value};
     ///
     /// let mut m = Map::new();
     /// m.insert("Lorem".to_owned(), "ipsum".into());
@@ -173,7 +176,7 @@ impl<T: Into<Value>> From<Vec<T>> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let v = vec!["lorem", "ipsum", "dolor"];
     /// let x: Value = v.into();
@@ -195,7 +198,7 @@ impl<T: Clone + Into<Value>> From<&[T]> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let v: &[&str] = &["lorem", "ipsum", "dolor"];
     /// let x: Value = v.into();
@@ -211,14 +214,14 @@ impl<T: Into<Value>> FromIterator<T> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let v = std::iter::repeat(42).take(5);
     /// let x: Value = v.collect();
     /// ```
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let v: Vec<_> = vec!["lorem", "ipsum", "dolor"];
     /// let x: Value = v.into_iter().collect();
@@ -226,7 +229,7 @@ impl<T: Into<Value>> FromIterator<T> for Value {
     ///
     /// ```
     /// use std::iter::FromIterator;
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let x: Value = Value::from_iter(vec!["lorem", "ipsum", "dolor"]);
     /// ```
@@ -241,7 +244,7 @@ impl<K: Into<String>, V: Into<Value>> FromIterator<(K, V)> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let v: Vec<_> = vec![("lorem", 40), ("ipsum", 2)];
     /// let x: Value = v.into_iter().collect();
@@ -261,7 +264,7 @@ impl From<()> for Value {
     /// # Examples
     ///
     /// ```
-    /// use serde_json::Value;
+    /// use rylv_serde_json::Value;
     ///
     /// let u = ();
     /// let x: Value = u.into();

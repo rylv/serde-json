@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 #![allow(clippy::float_cmp)]
 
 use serde_derive::{Deserialize, Serialize};
@@ -11,8 +14,8 @@ enum E {
 #[test]
 fn test() {
     let e = E::Float(159.1);
-    let v = serde_json::to_value(e).unwrap();
-    let e = serde_json::from_value::<E>(v).unwrap();
+    let v = rylv_serde_json::to_value(e).unwrap();
+    let e = rylv_serde_json::from_value::<E>(v).unwrap();
 
     match e {
         E::Float(f) => assert_eq!(f, 159.1),

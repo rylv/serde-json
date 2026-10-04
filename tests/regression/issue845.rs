@@ -1,3 +1,6 @@
+// Modified by the rylv-serde-json fork: crate rename and related references.
+// Original project: https://github.com/serde-rs/json (MIT OR Apache-2.0).
+
 #![allow(clippy::trait_duplication_in_bounds)] // https://github.com/rust-lang/rust-clippy/issues/8757
 
 use serde::{Deserialize, Deserializer};
@@ -67,8 +70,8 @@ pub struct Struct {
 #[test]
 fn test() {
     let j = r#" {"i":100} "#;
-    println!("{:?}", serde_json::from_str::<Struct>(j).unwrap());
+    println!("{:?}", rylv_serde_json::from_str::<Struct>(j).unwrap());
 
     let j = r#" {"i":"100"} "#;
-    println!("{:?}", serde_json::from_str::<Struct>(j).unwrap());
+    println!("{:?}", rylv_serde_json::from_str::<Struct>(j).unwrap());
 }
